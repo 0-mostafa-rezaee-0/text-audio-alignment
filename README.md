@@ -80,6 +80,8 @@ jupyter lab demo.ipynb
 
 `requirements.txt` is the single list of Python packages; `environment.yml` reads it and adds Python and ffmpeg.
 
+Tested with stable-ts 2.19.1 on Python 3.11.18, Windows 11 (conda env from `environment.yml`, CPU, Whisper `base` model).
+
 ## Repo structure
 
 ```
@@ -91,7 +93,7 @@ text-audio-alignment/
 ├── environment.yml    # conda environment: python, ffmpeg + requirements.txt
 ├── demo.ipynb
 ├── data/
-│   ├── sample.wav     # not committed until sourced
+│   ├── sample.wav     # LibriSpeech dev-clean utterance, CC BY 4.0
 │   ├── sample.txt     # exact transcript of the clip
 │   └── SOURCES.md     # where the clip and transcript came from, license
 └── outputs/           # aligned words (json, srt)
