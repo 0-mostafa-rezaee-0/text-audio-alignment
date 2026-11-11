@@ -18,9 +18,10 @@ The timeline is written from the point of view of an engineer who can pull a pub
 | 2015 | aeneas | `pip install`, command line or Python library; output is a sync map |
 | 2016 | Gentle | Docker image or Mac app; REST API and command line; JSON output; English only |
 | 2017 | Montreal Forced Aligner (MFA) | Stand-alone Kaldi-based package; word and phone boundaries; trainable on own data |
+| 2022 | stable-ts | First PyPI release Nov 2022 (Whisper timestamp tooling); aligns audio to a given transcript in current versions |
 | 2023 | WhisperX | Python; Whisper-based transcription plus word-level alignment |
-| 2024 | PyTorch forced alignment API | GPU-accelerated Viterbi alignment inside PyTorch |
-| 2026 | MFA 3.x, stable-ts | Current MFA release; stable-ts aligns audio to a given transcript |
+| 2023 | PyTorch forced alignment API | GPU-accelerated Viterbi alignment inside PyTorch (torchaudio 2.1, Oct 2023) |
+| 2026 | MFA 3.x | Current MFA release |
 
 ### Before 2015
 Forced aligners existed but were built for phonetics research. The common ones (Prosodylab-aligner, P2FA, FAVE, MAUS) rely on the HTK toolkit. They are mentioned for context only and are not part of the timeline.
@@ -44,15 +45,16 @@ Forced aligners existed but were built for phonetics research. The common ones (
 - Distributed as a stand-alone package; aligns word and phone boundaries.
 - Today pretrained models are available for many languages.
 
-### 2023–2024: neural aligners
-- WhisperX (2023) adds word-level timestamps to Whisper transcripts using a separate alignment model.
-- PyTorch's forced alignment API implements GPU-accelerated Viterbi alignment (described in 2024 work).
+### 2022–2023: neural aligners
+- stable-ts (first PyPI release 1.0.0, 20 Nov 2022) builds on Whisper; its forced alignment to a given transcript (`model.align`) is what the demo uses. The release year is verified; the year the `align` feature was added is not.
+- WhisperX (2023; arXiv v1, 1 March 2023) adds word-level timestamps to Whisper transcripts using a separate alignment model.
+- PyTorch's forced alignment API (`torchaudio.functional.forced_align`) implements GPU-accelerated Viterbi alignment. It is absent from the torchaudio 2.0.0 docs and present in 2.1.0 (released 4 Oct 2023).
 
 ### Today (November 2026)
 - MFA is at version 3.x and still maintained.
 - stable-ts can force-align audio to a given transcript. This is the approach used in the demo.
 
-> **To verify before publishing:** the 2023 (WhisperX) and 2024 (PyTorch API) years come from secondary references, and the stable-ts release year was not found. See `STATUS.md`.
+> **Verification note:** years for WhisperX, the PyTorch API and stable-ts were checked against primary sources (see below and `STATUS.md`). The PyTorch year was corrected from 2024 to 2023. Still unverified: the year `align` was added to stable-ts.
 
 ## Demo
 
@@ -100,5 +102,8 @@ text-audio-alignment/
 - Gentle: https://github.com/strob/gentle (version cited in the MFA poster: https://montreal-forced-aligner.readthedocs.io/en/v1.0/_downloads/c08c0a663da831c22b71fa189af85c9d/MFA_poster_LSA2017.pdf)
 - MFA paper: https://www.isca-archive.org/interspeech_2017/mcauliffe17_interspeech.html
 - MFA user guide (other tools, current version): https://montreal-forced-aligner.readthedocs.io/en/latest/user_guide/
-- easytranscriber (WhisperX, PyTorch alignment API): https://pypi.org/project/easytranscriber/
-- stable-ts alignment: https://awesome.ecosyste.ms/projects/github.com%2Fcrone-ai%2Fforce-align-wordstamps
+- WhisperX paper (arXiv v1, 1 March 2023): https://arxiv.org/abs/2303.00747
+- TorchAudio 2.1 paper (arXiv, 27 Oct 2023): https://arxiv.org/abs/2310.17864
+- torchaudio `forced_align` docs, present in 2.1.0 (404 in 2.0.0): https://docs.pytorch.org/audio/2.1.0/generated/torchaudio.functional.forced_align.html
+- torchaudio release dates (PyPI): https://pypi.org/project/torchaudio/#history
+- stable-ts release history (PyPI, first release 1.0.0 on 2022-11-20): https://pypi.org/project/stable-ts/#history
